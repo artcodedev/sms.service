@@ -1,21 +1,20 @@
 
 
 
-// import { ConnectorSIM800C } from "./ConnectorSIM800C";
-import { ConnectorSIM800C } from './ConnectorSIM800C.js';
-// import punycode from 'punycode';
+import { ConnectorSIM800C } from './ConnectorSIM800C';
+
 
 interface Message {
-    id: string
-    phone: string
-    date: string
+    id:      string
+    phone:   string
+    date:    string
     message: string
 }
 
 interface NewMessages { 
-    type: string;
-    phone: any;
-    date: any;
+    type:    string;
+    phone:   any;
+    date:    any;
     message: string;
 }
 
@@ -91,7 +90,7 @@ export class Sim800c {
     /*
     *** privare method
     */
-    private async getAllMessagesM(number: string): Promise<Message[]> {
+    private async getAllMessagesM(number?: string): Promise<Message[]> {
 
         await this.connectorSIM800C.sendCommand("AT+CMGF=1");
 
@@ -186,7 +185,7 @@ export class Sim800c {
     /*
     *** Get all messages if {number == null} or get all messages use {number} 
     */
-    public async getAllMessages(number: string): Promise<Message[]> {
+    public async getAllMessages(number?: string): Promise<Message[]> {
 
         return await this.getAllMessagesM(number);
 

@@ -5,18 +5,7 @@
 
 import * as fs from 'fs';
 import { Sim800c } from './Sim800C/Sim800c';
-
-
-
-interface TTY {
-    phone: string
-    tty: string
-}
-
-interface DATA {
-    ports: TTY[]
-
-}
+import { TTY } from '../Interfaces/interfaces';
 
 export class TTYGetter {
 
@@ -75,10 +64,6 @@ export class TTYGetter {
         return resTTY;
     }
 
-    private async saveTTY(): Promise<boolean> {
-        return false
-    }
-
     public async tty(): Promise<TTY[]> {
 
         const tty: TTY[] = []
@@ -93,46 +78,7 @@ export class TTYGetter {
             }
         }
 
-        if (tty.length) {
-
-            const data: DATA = {
-                ports: tty
-            }
-
-            fs.writeFile('./Ports/tty.json', JSON.stringify(data), 'utf-8', (e) => {
-                console.log(e)
-            })
-            // some file
-        }
-
-
         return tty;
     }
 
 }
-
-
-
-
-
-// const main = async () => {
-
-//     const tty = new TTYGetter()
-//     const ports: TTY[] = await tty.tty();
-
-//     console.log(ports);
-
-
-// }; main();
-
-/*
-
-
-{
-   -- prvider
-   -- number
-   -- tty
-}
-
-
-*/

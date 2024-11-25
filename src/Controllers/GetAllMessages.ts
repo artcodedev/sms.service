@@ -15,7 +15,7 @@ export class GetAllMessages {
 
             await sim.openPortSim800c();
 
-            const response: Message[] = await sim.getAllMessages(pr.number ? pr.number : undefined);
+            const response: Message[] = await sim.getAllMessages(pr.number);
 
             await sim.closePortSim800c()
 

@@ -52,16 +52,12 @@ app.post('/getlastmessage', async (c) => c.json(await GetLastMessage.getLastMess
 /*
 *** Get all message
 */
-app.post('/getallmessage', async (c) => c.json(await GetAllMessages.getAllMessages(await c.req.json())));
+app.post('/getallmessages', async (c) => c.json(await GetAllMessages.getAllMessages(await c.req.json())));
 
 /*
 *** Delete all message
 */
 app.post('/deleteallmessage', async (c) => c.json(await DeleteAllMessage.deleteAllMessage(await c.req.json())));
-
-
-
-
 
 
 Console.log(`Server start on port ${port}`);

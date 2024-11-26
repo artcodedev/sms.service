@@ -23,13 +23,13 @@ export class SendMessage {
 
         try {
             
-            // const sim = new Sim800c(pr.port, 9600);
+            const sim = new Sim800c(pr.port, 9600);
 
-            // await sim.openPortSim800c();
+            await sim.openPortSim800c();
 
-            // const response: boolean = await sim.sendMessage(pr.number, pr.message);
+            const response: boolean = await sim.sendMessage(pr.number, pr.message);
 
-            // await sim.closePortSim800c()
+            await sim.closePortSim800c()
 
             return {status: true}
 

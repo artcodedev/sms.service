@@ -35,15 +35,7 @@ app.get('/', async (c) => c.json({ status: false, data: 'incorrect parameters' }
 /*
 *** Send messages
 */
-app.get('/sendmessage', async (c) => {
-
-  // console.log(await SendMessage.sendMessage({ port: '/dev/ttyUSB0', number: "+79841533290", message: "hello1"}))
-
-  return c.json({});
-
-})
-
-// app.post('/sendmessage', async (c) => c.json(await SendMessage.sendMessage(await c.req.json())))
+app.post('/sendmessage', async (c) => c.json(await SendMessage.sendMessage(await c.req.json())))
 
 /*
 *** Get all tty
@@ -75,7 +67,9 @@ app.post('/getallmessages', async (c) => c.json(await GetAllMessages.getAllMessa
 */
 app.post('/deleteallmessage', async (c) => c.json(await DeleteAllMessage.deleteAllMessage(await c.req.json())));
 
-
+/*
+*** Start APP
+*/
 Console.log(`Server start on port ${port}`);
 
 serve({ fetch: app.fetch, port });

@@ -22,7 +22,6 @@ export class GetAllMessages {
             return { status: true, data: response}
 
         } catch(e) {
-            console.log(e)
             return {status: false}
         }
     }

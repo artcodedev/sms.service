@@ -254,7 +254,7 @@ export class Sim800c {
     /*
     *** Send message
     */
-    public async sendMessage(number: string, message: string): Promise<boolean | string | void> {
+    public async sendMessage(number: string, message: string): Promise<boolean> {
 
 
         const txt_mode: string | void = await this.connectorSIM800C.sendCommand("AT+CMGF=1");

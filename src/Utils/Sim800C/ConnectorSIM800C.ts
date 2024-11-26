@@ -47,6 +47,7 @@ export class ConnectorSIM800C {
     *** Send command to SIM800C
     */
     public async sendCommand(command:string, terminator:string = '\r', timeout:number = 30000): Promise<string | void> {
+
         return new Promise<void | string>((resolve, reject ) => {
 
             let response: string[] = [];
@@ -74,6 +75,8 @@ export class ConnectorSIM800C {
                 }
 
             }
+
+            // const buf: Buffer = Buffer.from(`${command}${terminator}`, 'ascii');
 
             this.port?.write(`${command}${terminator}`);
             this.port?.on('data', listener);

@@ -27,6 +27,15 @@ export class Sim800c {
     }
 
     /*
+    *** Delay (miliseconds)
+    */
+    private async delay(time: number): Promise<void> {
+        return new Promise(function (resolve) {
+            setTimeout(resolve, time)
+        });
+    }
+
+    /*
     *** Open port SIM800c
     */
     public async openPortSim800c(): Promise<void> {
@@ -54,7 +63,12 @@ export class Sim800c {
     *** Decode message
     */
     private async ucs2encode(codePoints: number[]): Promise<string> {
-        return String.fromCodePoint(...codePoints);
+
+        try {
+            return String.fromCodePoint(...codePoints);
+        } catch(e) {
+            return '';
+        }
     }
 
     /*
@@ -67,12 +81,12 @@ export class Sim800c {
     }
 
     /*
-    *** privare method
-    *** decode UCS2 to UTF
+    *** Decode UCS2 to UTF
     */
     private async decodeUCS2(message: string = ''): Promise<string> {
 
         try {
+
             const txt_codes: RegExpMatchArray | null = message.match(/.{1,4}/g);
             let codes: number[] = [];
             if (txt_codes != null) {
@@ -94,6 +108,8 @@ export class Sim800c {
 
         await this.connectorSIM800C.sendCommand("AT+CMGF=1");
 
+        await this.delay(500);
+
         const response: Message[] = [];
 
         const allMessage: string | void = await this.connectorSIM800C.sendCommand("AT+CMGL=\"ALL\"");
@@ -101,6 +117,7 @@ export class Sim800c {
         const massMessage: string[] | undefined = allMessage?.split("\r\n\r\n");
 
         if (massMessage != undefined) {
+
             for (let i = 0; i < massMessage.length; i++) {
 
                 const spliMassMessage: string[] = massMessage[i].split(",");
@@ -110,7 +127,7 @@ export class Sim800c {
                     const phone: string = spliMassMessage[2].replaceAll('"', '');
 
                     const message: Message = {
-                        id: (i++).toString(),
+                        id: (i + 1).toString(),
                         phone: phone,
                         date: spliMassMessage[4],
                         message: await this.decodeUCS2(spliMassMessage[5].split('\r\n')[1])
@@ -136,6 +153,7 @@ export class Sim800c {
     *** privare method
     */
     private async getNewMessage(number: string): Promise<NewMessages[]> {
+
         await this.connectorSIM800C.sendCommand("AT+CMGF=1");
 
         const unread: string = "REC UNREAD";
@@ -163,6 +181,7 @@ export class Sim800c {
                         }
 
                         if (spliMassMessage[1] === unread) {
+
                             if (number) {
                                 if (number === phone) {
                                     response.push(message);
@@ -230,6 +249,28 @@ export class Sim800c {
 
         await this.connectorSIM800C.sendCommand("AT+CMGDA=\"DEL ALL\"");
 
+    }
+
+    /*
+    *** Send message
+    */
+    public async sendMessage(number: string, message: string): Promise<boolean | string | void> {
+
+
+        const txt_mode: string | void = await this.connectorSIM800C.sendCommand("AT+CMGF=1");
+
+        await this.delay(1000)
+
+        const res: string | void = await this.connectorSIM800C.sendCommand(`AT+CMGS="${number}"`);
+
+        await this.delay(1000)
+
+        /*
+        *** In process
+        */
+    
+
+        return false;
     }
 
 }

@@ -1,12 +1,14 @@
 import { serve } from '@hono/node-server';
-import { Hono } from 'hono'
+import { Hono } from 'hono';
 import { Console } from './Utils/Console';
-import { ApiGetTTY } from './Controllers/ApiGetTTY'
+import { ApiGetTTY } from './Controllers/ApiGetTTY';
 import { GetNewLastMessage } from './Controllers/GetNewLastMessage';
 import { GetNewAllMessage } from './Controllers/GetNewAllMessage';
-import { GetLastMessage } from './Controllers/GetLastMessage'
+import { GetLastMessage } from './Controllers/GetLastMessage';
 import { GetAllMessages } from './Controllers/GetAllMessages';
-import { DeleteAllMessage } from './Controllers/DeleteAllMessage'
+import { DeleteAllMessage } from './Controllers/DeleteAllMessage';
+import { SendMessage } from './Controllers/SendMessage';
+import { Sim800c } from "./Utils/Sim800C/Sim800c";
 
 const app = new Hono();
 const port = 3005;
@@ -20,14 +22,28 @@ send message
 
 Answers
 
-{status: bool, data: any}
+{status: bool, data: any}some
 
 */
 
 /*
 *** Index page
 */
+
 app.get('/', async (c) => c.json({ status: false, data: 'incorrect parameters' }))
+
+/*
+*** Send messages
+*/
+app.get('/sendmessage', async (c) => {
+
+  // console.log(await SendMessage.sendMessage({ port: '/dev/ttyUSB0', number: "+79841533290", message: "hello1"}))
+
+  return c.json({});
+
+})
+
+// app.post('/sendmessage', async (c) => c.json(await SendMessage.sendMessage(await c.req.json())))
 
 /*
 *** Get all tty

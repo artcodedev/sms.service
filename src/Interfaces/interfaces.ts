@@ -24,11 +24,38 @@ export interface NewMessages {
 }
 
 export interface ApiGetNewMessage {
+    token: string
     number:  string
     port:    string
 }
 
 export interface ApiGetAllMessages {
+    token: string
     number?: string
     port:    string
+}
+
+export interface ResponseNewLastMessage {
+    status: boolean
+    data?: NewMessages | []
+}
+
+export interface ResponseNewAllMessage {
+    status: boolean
+    data?: NewMessages[]
+}
+
+export interface ResponseLastMessage {
+    status: boolean
+    data?: Message | []
+}
+
+export interface Response {
+    status: boolean
+    data?: Message[]
+}
+
+export interface ReqDeleteALlMessage {
+    token: string
+    port: string
 }

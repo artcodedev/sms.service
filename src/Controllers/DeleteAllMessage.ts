@@ -1,30 +1,35 @@
 
+import { SecretKey } from "../Secure/SeckretKey";
 import { Sim800c } from "../Utils/Sim800C/Sim800c";
+import { Token } from "../Utils/Token";
+import { Response, ReqDeleteALlMessage } from '../Interfaces/interfaces';
 
-interface Response {
-    status: boolean
-}
 
 export class DeleteAllMessage {
 
-    public static async deleteAllMessage({port}: {port: string}): Promise<Response> {
+    public static async deleteAllMessage({...pr}: ReqDeleteALlMessage): Promise<Response> {
 
         try {
-            
-            const sim = new Sim800c(port, 9600);
 
-            await sim.openPortSim800c();
+            const token: boolean = await Token.verify(pr.token, SecretKey.secret_key_micro);
 
-            await sim.deleteAllMessage();
+            if (token) {
+                const sim = new Sim800c(pr.port, 9600);
 
-            await sim.closePortSim800c()
+                await sim.openPortSim800c();
 
-            return {status: true}
+                await sim.deleteAllMessage();
+
+                await sim.closePortSim800c()
+
+                return { status: true }
+            }
+
+            return { status: false }
 
         } catch (e) {
 
-            console.log(e)
-            return {status: false}
+            return { status: false }
         }
     }
 }

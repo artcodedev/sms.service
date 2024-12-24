@@ -26,6 +26,7 @@ export class ConnectorSIM800C {
     *** Open port SIM800C
     */
     public async open(): Promise<void | Error> {
+        
         return new Promise<void>((resolve, reject) => {
             this.port = new SerialPort(this.options);
 
@@ -38,8 +39,8 @@ export class ConnectorSIM800C {
 
             });
 
-            this.port.on('open', () => resolve());
-            this.port.on('error', (err: Error) => reject(err));
+            this.port.on('open', (): void => resolve());
+            this.port.on('error', (err: Error): void => reject(err));
         })
     }
 
@@ -53,7 +54,7 @@ export class ConnectorSIM800C {
             let response: string[] = [];
             let commandTimeout: ReturnType<typeof setTimeout>;
 
-            let listener = (s: string) => {
+            let listener = (s: string): void => {
 
                 response.push(s.toString());
 

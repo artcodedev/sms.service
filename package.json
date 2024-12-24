@@ -5,11 +5,15 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.13.7",
+    "fs-extra": "^11.2.0",
     "hono": "^4.6.12",
+    "jsonwebtoken": "^9.0.2",
+    "@types/jsonwebtoken": "^9.0.7",
     "serialport": "^12.0.0"
   },
   "devDependencies": {
     "@types/bun": "latest",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^20.11.17",
     "tsx": "^4.7.1"
   }

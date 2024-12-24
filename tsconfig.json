@@ -3,6 +3,8 @@
     "strict": true,
     "jsx": "react-jsx",
     "jsxImportSource": "hono/jsx",
-    "lib": ["ES2021"]
+    "lib": ["ES2021"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
   }
 }

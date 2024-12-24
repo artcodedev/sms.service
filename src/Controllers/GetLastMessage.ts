@@ -1,30 +1,35 @@
 
 import { Sim800c } from "../Utils/Sim800C/Sim800c";
-import { ApiGetNewMessage, Message } from "../Interfaces/interfaces";
+import { ApiGetNewMessage, Message, ResponseLastMessage } from "../Interfaces/interfaces";
+import { Token } from "../Utils/Token";
+import { SecretKey } from "../Secure/SeckretKey";
 
-interface Response {
-    status: boolean
-    data?: Message | []
-}
 
 export class GetLastMessage {
 
-    public static async getLastMessage({...pr}: ApiGetNewMessage): Promise<Response>  {
+    public static async getLastMessage({ ...pr }: ApiGetNewMessage): Promise<ResponseLastMessage> {
 
         try {
 
-            const sim = new Sim800c(pr.port, 9600);
+            const token: boolean = await Token.verify(pr.token, SecretKey.secret_key_micro);
 
-            await sim.openPortSim800c();
+            if (token) {
+                const sim = new Sim800c(pr.port, 9600);
 
-            const response: Message | [] = await sim.getLastMessage(pr.number);
+                await sim.openPortSim800c();
 
-            await sim.closePortSim800c()
+                const response: Message | [] = await sim.getLastMessage(pr.number);
 
-            return { status: true, data: response}
+                await sim.closePortSim800c()
 
-        } catch(e) {
-            return {status: false}
+                return { status: true, data: response }
+
+            }
+
+            return { status: false, data: [] }
+
+        } catch (e) {
+            return { status: false }
         }
     }
 }

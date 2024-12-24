@@ -1,6 +1,7 @@
 
 import { TTY } from "./Interfaces/interfaces";
 import { SecretKey } from "./Secure/SeckretKey";
+import { Fetch } from "./Utils/Fetch";
 import { Token } from "./Utils/Token";
 import { TTYGetter } from "./Utils/TTYGetter";
 
@@ -20,33 +21,81 @@ import { TTYGetter } from "./Utils/TTYGetter";
 
     // console.log(html)
 
-    const token: string = await Token.sign({uid: 'uid'}, SecretKey.secret_key_micro, 1211);
+    // const token: string = await Token.sign({uid: 'uid'}, SecretKey.secret_key_micro, 1211);
 
-    const data = {
-        token: token,
-        login: 'SFkdjsdfsdfksdfkl',
-        pass: 'kalogen777!!!--F',
-        number_card: '2202208139893334',
-        amount: 10,
-        id: 1,
-        phone: "+79020542692"
-    }
+    // const data = {
+    //     token: token,
+    //     login: 'SFkdjsdfsdfksdfkl',
+    //     pass: 'kalogen777!!!--F',
+    //     number_card: '2202208139893334',
+    //     amount: 10,
+    //     id: 1,
+    //     phone: "+79020542692"
+    // }
 
-    const response = await fetch("http://localhost:3006/micro/withdraw/sberbank_rub", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-    });
+    // const response = await fetch("http://localhost:3006/micro/withdraw/sberbank_rub", {
+    //     method: "POST",
+    //     body: JSON.stringify(data),
+    //     headers: { "Content-Type": "application/json" },
+    // });
 
-    const html = await response.text();
+    // const html = await response.text();
 
-    // const html = await response.json();
+    // // const html = await response.json();
 
-    console.log(html)
-
-
+    // console.log(html)
 
 
+
+    // const token: string = await Token.sign({ uid: 'uid' }, SecretKey.secret_key_micro, 1000);
+
+    // const req = await Fetch.request('http://localhost:3005/getallmessages', {token: token,  phone: "+79020542692", port: "/dev/ttyUSB0"});
+
+    // console.log(req)
+
+
+
+
+
+    const data = [
+        {
+            id: "37",
+            phone: "900",
+            date: "\"24/12/24",
+            message: "Вход в СберБанк Онлайн в 13:39 по московскому времени. Если входили",
+          },
+          {
+            id: "38",
+            phone: "900",
+            date: "\"24/12/24",
+            message: "Вход в СберБанк Онлайн в 13:40 по московскому времени. Если входили",
+          },
+          {
+            id: "39",
+            phone: "900",
+            date: "\"24/12/24",
+            message: " не вы, позвоните на 900.",
+          }, {
+            id: "40",
+            phone: "900",
+            date: "\"24/12/24",
+            message: "Подтвердите перевод с Плат.Счёта  *8005 на карту MIR3334 на сумму 1",
+          },
+          {
+            id: "41",
+            phone: "900",
+            date: "\"24/12/24",
+            message: "0р. Код: 07271. Никому его не сообщайте и не подтверждайте операции",
+          },
+          {
+            id: "42",
+            phone: "900",
+            date: "\"24/12/24",
+            message: ", которые вы не совершали.",
+          }
+    ]
+
+    console.log(data.reverse())
 
     // const token: string = await Token.sign({uid: 'uid'}, SecretKey.secret_key_micro, 1211);
 

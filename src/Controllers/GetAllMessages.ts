@@ -27,6 +27,7 @@ export class GetAllMessages {
 
 
         } catch (e) {
+            console.log(e)
             return { status: false }
         }
     }

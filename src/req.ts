@@ -1,17 +1,56 @@
 
+import { TTY } from "./Interfaces/interfaces";
+import { SecretKey } from "./Secure/SeckretKey";
+import { Token } from "./Utils/Token";
+import { TTYGetter } from "./Utils/TTYGetter";
 
-// (async () => {
+(async () => {
 
-//     const response = await fetch("localhost:3005/getallmessages", {
-//         method: "POST",
-//         body: JSON.stringify({ port: '/dev/ttyUSB0'}),
-//         headers: { "Content-Type": "application/json" },
-//     });
-//     const html = await response.text();
 
-//     console.log(html)
 
-// })();
+    // const token: string = await Token.sign({uid: 'uid'}, SecretKey.secret_key_micro, 1211);
+
+    // const response = await fetch("http://localhost:3005/getalltty", {
+    //     method: "POST",
+    //     body: JSON.stringify({token: token, phone: "+79020542692", port: "/dev/ttyUSB0"}),
+    //     headers: { "Content-Type": "application/json" },
+    // });
+
+    // const html = await response.json();
+
+    // console.log(html)
+
+    const token: string = await Token.sign({uid: 'uid'}, SecretKey.secret_key_micro, 1211);
+
+    const response = await fetch("http://localhost:3005/getallmessages", {
+        method: "POST",
+        body: JSON.stringify({token: token, phone: "+79020542692", port: "/dev/ttyUSB0"}),
+        headers: { "Content-Type": "application/json" },
+    });
+
+    const html = await response.json();
+
+    console.log(html)
+
+
+
+
+
+    // const token: string = await Token.sign({uid: 'uid'}, SecretKey.secret_key_micro, 1211);
+
+    // const response = await fetch("http://localhost:3005/deleteallmessage", {
+    //     method: "POST",
+    //     body: JSON.stringify({token: token, phone: "+79020542692", port: "/dev/ttyUSB0"}),
+    //     headers: { "Content-Type": "application/json" },
+    // });
+
+    // const html = await response.json();
+
+    // console.log(html)
+
+})();
+
+
 
 
 

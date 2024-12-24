@@ -59,3 +59,8 @@ export interface ReqDeleteALlMessage {
     token: string
     port: string
 }
+
+export interface ResponseTTY {
+    status: boolean
+    data: TTY[]
+}

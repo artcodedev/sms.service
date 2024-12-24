@@ -14,18 +14,6 @@ const app = new Hono();
 const port = 3005;
 
 
-/* 
-
-send message
-
-============
-
-Answers
-
-{status: bool, data: any}some
-
-*/
-
 /*
 *** Index page
 */
@@ -40,7 +28,7 @@ app.post('/sendmessage', async (c) => c.json(await SendMessage.sendMessage(await
 /*
 *** Get all tty
 */
-app.post('/getalltty', async (c) => c.json(await ApiGetTTY.tty()));
+app.post('/getalltty', async (c) => c.json(await ApiGetTTY.tty(await c.req.json())));
 
 /*
 *** Get last new message

@@ -21,8 +21,11 @@ export class TTYGetter {
         for (let i: number = 0; i < 256; i++) {
 
             const port: string = `/dev/ttyUSB${i}`;
+            
             if (fs.existsSync(port)) { ports.push(port) }
         }
+
+        console.log(ports)
 
         return ports
     }
@@ -56,6 +59,8 @@ export class TTYGetter {
             await tty.closePortSim800c();
 
         } catch (e) {
+
+            // console.log(e)
             /*
             *** catch Error
             */

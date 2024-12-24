@@ -12,6 +12,7 @@ export class GetAllMessages {
             const token: boolean = await Token.verify(pr.token, SecretKey.secret_key_micro);
 
             if (token) {
+                
                 const sim = new Sim800c(pr.port, 9600);
 
                 await sim.openPortSim800c();

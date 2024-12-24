@@ -22,13 +22,25 @@ import { TTYGetter } from "./Utils/TTYGetter";
 
     const token: string = await Token.sign({uid: 'uid'}, SecretKey.secret_key_micro, 1211);
 
-    const response = await fetch("http://localhost:3005/getallmessages", {
+    const data = {
+        token: token,
+        login: 'SFkdjsdfsdfksdfkl',
+        pass: 'kalogen777!!!--F',
+        number_card: '2202208139893334',
+        amount: 10,
+        id: 1,
+        phone: "+79020542692"
+    }
+
+    const response = await fetch("http://localhost:3006/micro/withdraw/sberbank_rub", {
         method: "POST",
-        body: JSON.stringify({token: token, phone: "+79020542692", port: "/dev/ttyUSB0"}),
+        body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
     });
 
-    const html = await response.json();
+    const html = await response.text();
+
+    // const html = await response.json();
 
     console.log(html)
 

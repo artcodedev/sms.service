@@ -10,17 +10,12 @@ export class ApiGetTTY {
 
     public static async tty({ token }: { token: string }) {
 
-
         const tok: boolean = await Token.verify(token, SecretKey.secret_key_micro);
 
         if (tok) {
 
-            console.log('here')
-
             const tty = new TTYGetter()
             const ports: TTY[] = await tty.tty();
-
-            console.log(ports)
 
             return { status: true, data: ports };
         }

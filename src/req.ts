@@ -95,7 +95,32 @@ import { TTYGetter } from "./Utils/TTYGetter";
           }
     ]
 
-    console.log(data.reverse())
+    const num: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+    const code_sms: string[] = []
+
+    for (let i of data.reverse()) {
+
+        const message: string = i.message.toLowerCase();
+
+        if (message.includes("код")) {
+            const position = message.indexOf('код');
+
+            for (let p = position; p < message.length; p++) {
+
+                if (num.includes('.')) {
+                    break
+                }
+
+                if (num.includes(message[p])) {
+                    code_sms.push(message[p])
+                }
+            }
+
+        }
+    }
+
+    console.log(code_sms.join(''))
 
     // const token: string = await Token.sign({uid: 'uid'}, SecretKey.secret_key_micro, 1211);
 

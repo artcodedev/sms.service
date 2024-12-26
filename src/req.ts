@@ -34,16 +34,18 @@ import { TTYGetter } from "./Utils/TTYGetter";
     // }
 
 
-    const data = {
-        token: token,
-        login: 'SFkdjsdfsdfksdfkl',
-        pass: 'kalogen777!!!--F',
-        number_card: '2202206759545713',
-        id_card: 1,
-        uid_bank: 'sdsdsdsdsddsdsd'
-    }
+    // const data = {
+    //     token: token,
+    //     login: 'SFkdjsdfsdfksdfkl',
+    //     pass: 'kalogen777!!!--F',
+    //     number_card: '2202206759545713',
+    //     id_card: 1,
+    //     uid_bank: 'sdsdsdsdsddsdsd'
+    // }
 
-    const response = await fetch("http://localhost:3006/micro/amount/sberbank_rub", {
+    const data = {token: await Token.sign({token: token}, SecretKey.secret_key_micro, 1000)}
+
+    const response = await fetch("http://localhost:3005/getalltty", {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },

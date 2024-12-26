@@ -9,6 +9,12 @@ export interface DATA {
     ports:   TTY[]
 }
 
+export interface AnswerTTY {
+    status: boolean
+    data: TTY[]
+}
+
+
 export interface Message {
     id:      string
     phone:   string

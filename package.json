@@ -5,10 +5,11 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.13.7",
+    "@types/fs-extra": "^11.0.4",
+    "@types/jsonwebtoken": "^9.0.7",
     "fs-extra": "^11.2.0",
     "hono": "^4.6.12",
     "jsonwebtoken": "^9.0.2",
-    "@types/jsonwebtoken": "^9.0.7",
     "serialport": "^12.0.0"
   },
   "devDependencies": {

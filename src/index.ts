@@ -8,10 +8,9 @@ import { GetLastMessage } from './Controllers/GetLastMessage';
 import { GetAllMessages } from './Controllers/GetAllMessages';
 import { DeleteAllMessage } from './Controllers/DeleteAllMessage';
 import { SendMessage } from './Controllers/SendMessage';
-import { Sim800c } from "./Utils/Sim800C/Sim800c";
 
 const app = new Hono();
-const port = 3005;
+const port = 3010;
 
 
 /*

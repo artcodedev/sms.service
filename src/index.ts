@@ -10,7 +10,7 @@ import { DeleteAllMessage } from './Controllers/DeleteAllMessage';
 import { SendMessage } from './Controllers/SendMessage';
 
 const app = new Hono();
-const port = 3010;
+const port = 3020;
 
 
 /*

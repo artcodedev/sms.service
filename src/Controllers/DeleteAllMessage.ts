@@ -14,6 +14,8 @@ export class DeleteAllMessage {
             const token: boolean = await Token.verify(pr.token, SecretKey.secret_key_micro);
 
             if (token) {
+
+                console.log(pr)
                 
                 const sim = new Sim800c(pr.port, 9600);
 
